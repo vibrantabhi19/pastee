@@ -1,0 +1,24 @@
+{% extends 'includes/base.html' %}
+
+{% block body %}
+        <div class="mdl-grid center">
+            {% if paste_name %}
+                    <div>
+                        <p>Paste added. Name: {{ paste_name }}</p>
+                        <a href="/paste/view/{{ paste_name }}">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                View paste
+                            </button>
+                        </a>
+                    </div>
+            {% else %}
+                    <div>
+                        <a href="/paste/add">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                Add new paste
+                            </button>
+                        </a>
+                    </div>
+            {% endif %}
+        </div>
+{% endblock %}
