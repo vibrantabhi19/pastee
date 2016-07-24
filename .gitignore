@@ -1,6 +1,6 @@
 ### Custom ignores ###
 data/
-config/
+config/config.cfg
 .idea/
 node_modules/
 
