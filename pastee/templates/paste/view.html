@@ -1,14 +1,14 @@
 {% extends 'includes/base.html' %}
 
 {% block body %}
-    <div class="mdl-grid center">
-        <div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="paste-detail">
                 {{ paste|safe }}
             </div>
 
             <a href="/">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                <button class="btn btn-default" type="submit">
                     Go home
                 </button>
             </a>
