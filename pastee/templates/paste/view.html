@@ -1,17 +1,19 @@
 {% extends 'includes/base.html' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="paste-detail">
-                {{ paste|safe }}
-            </div>
-
-            <a href="/">
-                <button class="btn btn-default" type="submit">
-                    Go home
-                </button>
-            </a>
+    <div class="col-md-12">
+        <div class="paste-detail">
+            {{ paste_content|safe }}
         </div>
+
+        {% if paste.user %}
+            <p>Created by {{ paste.user.username }}</p>
+        {% endif %}
+
+        <a href="/">
+            <button class="btn btn-default" type="submit">
+                Go home
+            </button>
+        </a>
     </div>
 {% endblock %}

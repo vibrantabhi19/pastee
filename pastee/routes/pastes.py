@@ -1,5 +1,6 @@
 from pastee import app
 from flask import render_template, request, redirect, url_for
+from flask_user import current_user
 
 import random
 import string
@@ -22,6 +23,9 @@ def add():
         language = Language.query.filter(Language.identifier == form.paste_language.data).first()
         paste = Paste(paste_name=rand_name, language=language)
 
+        if current_user.is_authenticated:
+            current_user.pastes.append(paste)
+
         form.populate_obj(paste)
         db.session.add(paste)
         db.session.commit()
@@ -35,6 +39,7 @@ def add():
 
 @app.route('/paste/view/<paste_name>')
 def view(paste_name):
-    paste = read_paste(paste_name)
+    paste_content = read_paste(paste_name)
+    paste = Paste.query.filter(Paste.paste_name == paste_name).first()
 
-    return render_template('paste/view.html', paste=paste)
+    return render_template('paste/view.html', paste=paste, paste_content=paste_content)

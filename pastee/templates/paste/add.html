@@ -1,20 +1,25 @@
 {% extends 'includes/base.html' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-            {{ form.csrf_token }}
-            <form method=post action="/paste/add">
-                <dl>
-                    {{ form.paste_text(class_='form-control') }}
-                </dl>
-                <dl>
-                    {{ form.paste_language(class_='form-control') }}
-                </dl>
-                <button class='btn btn-default' type='submit'>
-                    Add
-                </button>
-            </form>
-        </div>
+    <div class="col-md-12">
+        {% for field, errors in form.errors.items() %}
+            <div class="alert alert-error">
+                {{ form[field].label }}: {{ ', '.join(errors) }}
+            </div>
+        {% endfor %}
+
+
+        {{ form.csrf_token }}
+        <form method=post action="/paste/add">
+            <dl>
+                {{ form.paste_text(class_='form-control') }}
+            </dl>
+            <dl>
+                {{ form.paste_language(class_='form-control') }}
+            </dl>
+            <button class='btn btn-default' type='submit'>
+                Add
+            </button>
+        </form>
     </div>
 {% endblock %}
