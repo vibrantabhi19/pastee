@@ -10,8 +10,8 @@ class User(db.Model, UserMixin):
     pastes = db.relationship('Paste', backref='user', lazy='dynamic')
     is_enabled = True
 
-    def __init__(self, username=None, password=None, is_active=None):
+    def __init__(self, username=None, password=None, is_active=None, is_enabled=True):
         self.username = username
         self.password = password
         self.active = is_active
-        self.is_enabled = True
+        self.is_enabled = is_enabled

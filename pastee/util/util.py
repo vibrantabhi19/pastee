@@ -50,3 +50,12 @@ def read_file(file_name):
         contents = f.read()
 
     return contents
+
+
+def delete_paste(file_name):
+    file = PASTES_FOLDER + file_name
+    try:
+        os.remove(file)
+        return True
+    except OSError:
+        return False

@@ -1,0 +1,9 @@
+{% extends 'includes/base.html' %}
+
+{% block body %}
+    <h1>Internal server error</h1>
+    <p>There's been a horrible error with the server.</p>
+    <p>
+        <a href="{% if current_user.is_authenticated %}{{ url_for('dashboard') }}{% else %}{{ url_for('index') }}{% endif %}">Go somewhere nice</a>
+    </p>
+{% endblock %}

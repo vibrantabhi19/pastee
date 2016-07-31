@@ -14,6 +14,7 @@ db = SQLAlchemy(app)
 from pastee.routes import index
 from pastee.routes import pastes
 from pastee.routes import admin
+from pastee.routes import error_handlers
 
 from pastee.models import language
 from pastee.models import paste

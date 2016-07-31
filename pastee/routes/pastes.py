@@ -1,5 +1,5 @@
 from pastee import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_user import current_user
 
 import random
@@ -10,7 +10,7 @@ from pastee.models.language import Language
 from pastee.forms.forms import PasteForm
 from pastee import db
 
-from pastee.util.util import create_file, read_paste
+from pastee.util.util import create_file, read_paste, delete_paste
 
 
 @app.route('/paste/add', methods=['GET', 'POST'])
@@ -39,7 +39,21 @@ def add():
 
 @app.route('/paste/view/<paste_name>')
 def view(paste_name):
+    paste = Paste.query.filter(Paste.paste_name == paste_name).first_or_404()
     paste_content = read_paste(paste_name)
-    paste = Paste.query.filter(Paste.paste_name == paste_name).first()
 
     return render_template('paste/view.html', paste=paste, paste_content=paste_content, current_user=current_user)
+
+
+@app.route('/paste/delete/<paste_name>')
+def delete(paste_name):
+    if not delete_paste(paste_name):
+        flash('Error deleting paste', 'danger')
+    else:
+        paste = Paste.query.filter(Paste.paste_name == paste_name).first()
+        paste.is_deleted = True
+        db.session.commit()
+
+        flash('Paste deleted correctly', 'success')
+
+    return redirect('dashboard' if current_user.is_authenticated else 'index')
