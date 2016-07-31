@@ -10,7 +10,7 @@
             <p>Created by {{ paste.user.username }}</p>
         {% endif %}
 
-        <a href="/">
+        <a href="{% if current_user.is_authenticated %}{{ url_for('dashboard') }}{% else %}{{ url_for('index') }}{% endif %}">
             <button class="btn btn-default" type="submit">
                 Go home
             </button>

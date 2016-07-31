@@ -13,7 +13,7 @@ gulp.task('default', ['watch'], function () {
 });
 
 gulp.task('css', function () {
-    return sass(paths.sourcesUi + '/sass/site.scss', {
+    return sass(paths.sourcesUi + '/sass/style.scss', {
         style: 'compressed',
         loadPath: [
             paths.sourcesUi + '/sass',

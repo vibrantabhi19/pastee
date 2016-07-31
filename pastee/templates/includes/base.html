@@ -10,7 +10,7 @@
 
 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/highlight.css') }}">
 
 
@@ -18,46 +18,12 @@
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono'>
     </head>
     <body>
+        {% include 'includes/_navbar.html' %}
+
         <div class="container">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#navbar" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ url_for('index') }}">Pastes</a>
-                </div>
+            {% block body %}
 
-                <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if current_user.is_authenticated %}
-                            <li><p class="navbar-text">Signed in as {{ current_user.username }}</p></li>
-                        {% endif %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                {% if current_user.is_authenticated %}
-                                    <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
-                                {% else %}
-                                    <li><a href="{{ url_for('user.login') }}">Login</a></li>
-                                    <li><a href="{{ url_for('user.register') }}">Register</a></li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <div class="container-fluid">
-                {% block body %}
-
-                {% endblock %}
-            </div>
+            {% endblock %}
         </div>
 
         <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>

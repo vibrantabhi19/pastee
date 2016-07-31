@@ -42,4 +42,4 @@ def view(paste_name):
     paste_content = read_paste(paste_name)
     paste = Paste.query.filter(Paste.paste_name == paste_name).first()
 
-    return render_template('paste/view.html', paste=paste, paste_content=paste_content)
+    return render_template('paste/view.html', paste=paste, paste_content=paste_content, current_user=current_user)
